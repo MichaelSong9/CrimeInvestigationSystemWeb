@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CrimeInvestigationDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AddCase">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CaseName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OfficerId" Type="Int32" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AddOfficer" Relationship="Self.FK_AddCase_AddOfficer" FromRole="AddCase" ToRole="AddOfficer" />
+    <NavigationProperty Name="AddEvidences" Relationship="Self.FK_AddEvidence_AddCase" FromRole="AddCase" ToRole="AddEvidence" />
+    <NavigationProperty Name="AddResults" Relationship="Self.FK_AddResult_AddCase" FromRole="AddCase" ToRole="AddResult" />
+    <NavigationProperty Name="AddSuspects" Relationship="Self.FK_AddSuspect_AddCase" FromRole="AddCase" ToRole="AddSuspect" />
+    <Property Name="CaseId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AddOfficerToCases" Relationship="CrimeInvestigationDBModel.FK_AddOfficerToCase_AddCase" FromRole="AddCase" ToRole="AddOfficerToCase" />
+    <NavigationProperty Name="AddCaseHistories" Relationship="CrimeInvestigationDBModel.FK_AddCaseHistory_AddCase" FromRole="AddCase" ToRole="AddCaseHistory" />
+  </EntityType>
+  <EntityType Name="AddEvidence">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CaseId" Type="Int32" />
+    <Property Name="EvidenceType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Evidence" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="SuspectId" Type="Int32" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Points" Type="Int16" />
+    <NavigationProperty Name="AddCase" Relationship="Self.FK_AddEvidence_AddCase" FromRole="AddEvidence" ToRole="AddCase" />
+    <NavigationProperty Name="AddSuspect" Relationship="Self.FK_AddEvidence_AddSuspect" FromRole="AddEvidence" ToRole="AddSuspect" />
+    <Property Name="Dates" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="AddOfficer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OfficerId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OfficerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MobileNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Area" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AddCases" Relationship="Self.FK_AddCase_AddOfficer" FromRole="AddOfficer" ToRole="AddCase" />
+    <NavigationProperty Name="AddOfficerToCases" Relationship="CrimeInvestigationDBModel.FK_AddOfficerToCase_AddOfficer" FromRole="AddOfficer" ToRole="AddOfficerToCase" />
+  </EntityType>
+  <EntityType Name="AddResult">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CaseId" Type="Int32" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AddCase" Relationship="Self.FK_AddResult_AddCase" FromRole="AddResult" ToRole="AddCase" />
+    <Property Name="Suspect" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="AddSuspect">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CaseId" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MobileNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Relation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AddCase" Relationship="Self.FK_AddSuspect_AddCase" FromRole="AddSuspect" ToRole="AddCase" />
+    <NavigationProperty Name="AddEvidences" Relationship="Self.FK_AddEvidence_AddSuspect" FromRole="AddSuspect" ToRole="AddEvidence" />
+    <Property Name="Dates" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_AddCase_AddOfficer">
+    <End Role="AddOfficer" Type="Self.AddOfficer" Multiplicity="0..1" />
+    <End Role="AddCase" Type="Self.AddCase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AddOfficer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AddCase">
+        <PropertyRef Name="OfficerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AddEvidence_AddCase">
+    <End Role="AddCase" Type="Self.AddCase" Multiplicity="0..1" />
+    <End Role="AddEvidence" Type="Self.AddEvidence" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AddCase">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AddEvidence">
+        <PropertyRef Name="CaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AddResult_AddCase">
+    <End Role="AddCase" Type="Self.AddCase" Multiplicity="0..1" />
+    <End Role="AddResult" Type="Self.AddResult" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AddCase">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AddResult">
+        <PropertyRef Name="CaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AddSuspect_AddCase">
+    <End Role="AddCase" Type="Self.AddCase" Multiplicity="0..1" />
+    <End Role="AddSuspect" Type="Self.AddSuspect" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AddCase">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AddSuspect">
+        <PropertyRef Name="CaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AddEvidence_AddSuspect">
+    <End Role="AddSuspect" Type="Self.AddSuspect" Multiplicity="0..1" />
+    <End Role="AddEvidence" Type="Self.AddEvidence" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AddSuspect">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AddEvidence">
+        <PropertyRef Name="SuspectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CrimeInvestigationDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AddCases" EntityType="Self.AddCase" />
+    <EntitySet Name="AddEvidences" EntityType="Self.AddEvidence" />
+    <EntitySet Name="AddOfficers" EntityType="Self.AddOfficer" />
+    <EntitySet Name="AddResults" EntityType="Self.AddResult" />
+    <EntitySet Name="AddSuspects" EntityType="Self.AddSuspect" />
+    <AssociationSet Name="FK_AddCase_AddOfficer" Association="Self.FK_AddCase_AddOfficer">
+      <End Role="AddOfficer" EntitySet="AddOfficers" />
+      <End Role="AddCase" EntitySet="AddCases" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AddEvidence_AddCase" Association="Self.FK_AddEvidence_AddCase">
+      <End Role="AddCase" EntitySet="AddCases" />
+      <End Role="AddEvidence" EntitySet="AddEvidences" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AddResult_AddCase" Association="Self.FK_AddResult_AddCase">
+      <End Role="AddCase" EntitySet="AddCases" />
+      <End Role="AddResult" EntitySet="AddResults" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AddSuspect_AddCase" Association="Self.FK_AddSuspect_AddCase">
+      <End Role="AddCase" EntitySet="AddCases" />
+      <End Role="AddSuspect" EntitySet="AddSuspects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AddEvidence_AddSuspect" Association="Self.FK_AddEvidence_AddSuspect">
+      <End Role="AddSuspect" EntitySet="AddSuspects" />
+      <End Role="AddEvidence" EntitySet="AddEvidences" />
+    </AssociationSet>
+    <EntitySet Name="AddOfficerToCases" EntityType="CrimeInvestigationDBModel.AddOfficerToCase" />
+    <AssociationSet Name="FK_AddOfficerToCase_AddCase" Association="CrimeInvestigationDBModel.FK_AddOfficerToCase_AddCase">
+      <End Role="AddCase" EntitySet="AddCases" />
+      <End Role="AddOfficerToCase" EntitySet="AddOfficerToCases" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AddOfficerToCase_AddOfficer" Association="CrimeInvestigationDBModel.FK_AddOfficerToCase_AddOfficer">
+      <End Role="AddOfficer" EntitySet="AddOfficers" />
+      <End Role="AddOfficerToCase" EntitySet="AddOfficerToCases" />
+    </AssociationSet>
+    <EntitySet Name="OfficerLogins" EntityType="CrimeInvestigationDBModel.OfficerLogin" />
+    <AssociationSet Name="FK_OfficerLogin_OfficerLogin" Association="CrimeInvestigationDBModel.FK_OfficerLogin_OfficerLogin">
+      <End Role="OfficerLogin" EntitySet="OfficerLogins" />
+      <End Role="OfficerLogin1" EntitySet="OfficerLogins" />
+    </AssociationSet>
+    <EntitySet Name="AddCaseHistories" EntityType="CrimeInvestigationDBModel.AddCaseHistory" />
+    <AssociationSet Name="FK_AddCaseHistory_AddCase" Association="CrimeInvestigationDBModel.FK_AddCaseHistory_AddCase">
+      <End Role="AddCase" EntitySet="AddCases" />
+      <End Role="AddCaseHistory" EntitySet="AddCaseHistories" />
+    </AssociationSet>
+    <EntitySet Name="AdminLogins" EntityType="CrimeInvestigationDBModel.AdminLogin" />
+    <EntitySet Name="Reports" EntityType="CrimeInvestigationDBModel.Report" />
+  </EntityContainer>
+  <EntityType Name="AddOfficerToCase">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CaseId" Type="Int32" />
+    <Property Name="OfficerId" Type="Int32" />
+    <NavigationProperty Name="AddCase" Relationship="CrimeInvestigationDBModel.FK_AddOfficerToCase_AddCase" FromRole="AddOfficerToCase" ToRole="AddCase" />
+    <NavigationProperty Name="AddOfficer" Relationship="CrimeInvestigationDBModel.FK_AddOfficerToCase_AddOfficer" FromRole="AddOfficerToCase" ToRole="AddOfficer" />
+  </EntityType>
+  <Association Name="FK_AddOfficerToCase_AddCase">
+    <End Type="CrimeInvestigationDBModel.AddCase" Role="AddCase" Multiplicity="0..1" />
+    <End Type="CrimeInvestigationDBModel.AddOfficerToCase" Role="AddOfficerToCase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AddCase">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AddOfficerToCase">
+        <PropertyRef Name="CaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AddOfficerToCase_AddOfficer">
+    <End Type="CrimeInvestigationDBModel.AddOfficer" Role="AddOfficer" Multiplicity="0..1" />
+    <End Type="CrimeInvestigationDBModel.AddOfficerToCase" Role="AddOfficerToCase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AddOfficer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AddOfficerToCase">
+        <PropertyRef Name="OfficerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="OfficerLogin">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OfficerId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="OfficerLogin1" Relationship="CrimeInvestigationDBModel.FK_OfficerLogin_OfficerLogin" FromRole="OfficerLogin" ToRole="OfficerLogin1" />
+    <NavigationProperty Name="OfficerLogin2" Relationship="CrimeInvestigationDBModel.FK_OfficerLogin_OfficerLogin" FromRole="OfficerLogin1" ToRole="OfficerLogin" />
+  </EntityType>
+  <Association Name="FK_OfficerLogin_OfficerLogin">
+    <End Type="CrimeInvestigationDBModel.OfficerLogin" Role="OfficerLogin" Multiplicity="1" />
+    <End Type="CrimeInvestigationDBModel.OfficerLogin" Role="OfficerLogin1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="OfficerLogin">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OfficerLogin1">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AddCaseHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CaseId" Type="Int32" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AddCase" Relationship="CrimeInvestigationDBModel.FK_AddCaseHistory_AddCase" FromRole="AddCaseHistory" ToRole="AddCase" />
+    <Property Name="Dates" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_AddCaseHistory_AddCase">
+    <End Type="CrimeInvestigationDBModel.AddCase" Role="AddCase" Multiplicity="0..1" />
+    <End Type="CrimeInvestigationDBModel.AddCaseHistory" Role="AddCaseHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AddCase">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AddCaseHistory">
+        <PropertyRef Name="CaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AdminLogin">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AdminId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Report">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="CaseName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CaseId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Suspect" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+</Schema>

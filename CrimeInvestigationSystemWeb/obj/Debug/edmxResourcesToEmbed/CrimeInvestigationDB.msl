@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CrimeInvestigationDBModelStoreContainer" CdmEntityContainer="CrimeInvestigationDBEntities">
+    <EntitySetMapping Name="AddCases">
+      <EntityTypeMapping TypeName="CrimeInvestigationDBModel.AddCase">
+        <MappingFragment StoreEntitySet="AddCase">
+          <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CaseName" ColumnName="CaseName" />
+          <ScalarProperty Name="OfficerId" ColumnName="OfficerId" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AddEvidences">
+      <EntityTypeMapping TypeName="CrimeInvestigationDBModel.AddEvidence">
+        <MappingFragment StoreEntitySet="AddEvidence">
+          <ScalarProperty Name="Dates" ColumnName="Dates" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+          <ScalarProperty Name="EvidenceType" ColumnName="EvidenceType" />
+          <ScalarProperty Name="Evidence" ColumnName="Evidence" />
+          <ScalarProperty Name="SuspectId" ColumnName="SuspectId" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Points" ColumnName="Points" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AddOfficers">
+      <EntityTypeMapping TypeName="CrimeInvestigationDBModel.AddOfficer">
+        <MappingFragment StoreEntitySet="AddOfficer">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="OfficerId" ColumnName="OfficerId" />
+          <ScalarProperty Name="OfficerName" ColumnName="OfficerName" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Mail" ColumnName="Mail" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AddResults">
+      <EntityTypeMapping TypeName="CrimeInvestigationDBModel.AddResult">
+        <MappingFragment StoreEntitySet="AddResult">
+          <ScalarProperty Name="Suspect" ColumnName="Suspect" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AddSuspects">
+      <EntityTypeMapping TypeName="CrimeInvestigationDBModel.AddSuspect">
+        <MappingFragment StoreEntitySet="AddSuspect">
+          <ScalarProperty Name="Dates" ColumnName="Dates" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Relation" ColumnName="Relation" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AddOfficerToCases">
+      <EntityTypeMapping TypeName="CrimeInvestigationDBModel.AddOfficerToCase">
+        <MappingFragment StoreEntitySet="AddOfficerToCase">
+          <ScalarProperty Name="OfficerId" ColumnName="OfficerId" />
+          <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OfficerLogins">
+      <EntityTypeMapping TypeName="CrimeInvestigationDBModel.OfficerLogin">
+        <MappingFragment StoreEntitySet="OfficerLogin">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="OfficerId" ColumnName="OfficerId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AddCaseHistories">
+      <EntityTypeMapping TypeName="CrimeInvestigationDBModel.AddCaseHistory">
+        <MappingFragment StoreEntitySet="AddCaseHistory">
+          <ScalarProperty Name="Dates" ColumnName="Dates" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdminLogins">
+      <EntityTypeMapping TypeName="CrimeInvestigationDBModel.AdminLogin">
+        <MappingFragment StoreEntitySet="AdminLogin">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reports">
+      <EntityTypeMapping TypeName="CrimeInvestigationDBModel.Report">
+        <MappingFragment StoreEntitySet="Report">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Suspect" ColumnName="Suspect" />
+          <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+          <ScalarProperty Name="CaseName" ColumnName="CaseName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
